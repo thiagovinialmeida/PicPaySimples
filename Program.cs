@@ -1,4 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Project.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<PicpaySimplesContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("PicpaySimplesContext") ?? throw new InvalidOperationException("Connection string 'PicpaySimplesContext' not found.")));
 
 // Add services to the container.
 
