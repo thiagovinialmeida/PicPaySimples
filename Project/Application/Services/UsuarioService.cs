@@ -14,11 +14,8 @@ namespace Project.Services
         {
             try
             {
-                if (identidade.Length == 11)
-                {
-                    _context.UserComum.Add(new UserComum(nome, email, senha, saldo, identidade));
-                    _context.SaveChanges();
-                }
+                _context.UserComum.Add(new UserComum(nome, email, senha, saldo, identidade));
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -31,13 +28,13 @@ namespace Project.Services
             try
             {
                 var usuario = ProcurarUsusario(id);
-                if(UsuarioExiste(id))
+                if (UsuarioExiste(id))
                 {
                     _context.UserComum.Remove(usuario);
                     _context.SaveChanges();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -48,14 +45,14 @@ namespace Project.Services
             try
             {
                 var usuario = ProcurarUsusario(id);
-                
-                if(usuario != null)
-                { 
-                _context.Update(usuario);
-                _context.SaveChanges();
+
+                if (usuario != null)
+                {
+                    _context.Update(usuario);
+                    _context.SaveChanges();
                 }
             }
-            catch(DbUpdateConcurrencyException dbE)
+            catch (DbUpdateConcurrencyException dbE)
             {
                 Console.WriteLine(dbE.Message);
             }
@@ -70,13 +67,45 @@ namespace Project.Services
             return ProcurarUsusario(id);
         }
         ////
-        public UserComum ProcurarUsusario(Guid id)
+        private UserComum ProcurarUsusario(Guid id)
         {
             return _context.UserComum.Find(id);
         }
+        public bool VerificarExistencia(string email,string identidade)
+        {
+            if (EmailExiste(email))
+            {
+                //Caso o email não exista, verificar CPF
+                if (IdentidadeExiste(identidade))
+                {
+                    //Caso o CPF não exista, pode criar novo usuario
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
         private bool UsuarioExiste(Guid id)
         {
-            return _context.Lojistas.Any(e => e.Id == id);
+            return _context.UserComum.Any(e => e.Id == id);
+        }
+        //Retorna TRUE se o cpf não existir
+        private bool IdentidadeExiste(string identidade)
+        {
+            UserComum usuario = _context.UserComum.FirstOrDefault(cpf => cpf.Cpf == identidade);
+            return usuario == null;
+        }
+        //Retorna TRUE se o email não existir
+        private bool EmailExiste(string email)
+        {
+            UserComum usuario = _context.UserComum.FirstOrDefault(e => e.Email == email);
+            return usuario == null;
         }
     }
 }

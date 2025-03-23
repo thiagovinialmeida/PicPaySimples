@@ -11,10 +11,7 @@ namespace Project.UI
     {
         private readonly UsuarioService _us;
 
-        public UsuariosController(PicpaySimplesContext context, UsuarioService us)
-        {
-            _us = us;
-        }
+        public UsuariosController(UsuarioService us) { _us = us; }
 
         // GET: api/Usuarios
         [HttpGet]
@@ -51,22 +48,31 @@ namespace Project.UI
         {
             try
             {
-                if (identidade.Length == 11)
+                switch (identidade.Length)
                 {
-                    _us.CriarConta(nome, email, senha, saldo, identidade);
-                    Console.WriteLine("Isso é um CPF");
-                    return Ok();
-                }
-                else if (identidade.Length == 14)
-                {
-                    new LojistaService().CriarConta(nome, email, senha, saldo, identidade);
-                    Console.WriteLine("Isso é um CNPJ");
-                    return Ok();
-                }
-                else
-                {
-                    Console.WriteLine("BadRequest");
-                    return BadRequest();
+                    case 11:
+                        {
+                            if (_us.VerificarExistencia(email, identidade))
+                            {
+                                _us.CriarConta(nome, email, senha, saldo, identidade);
+                                Console.WriteLine("Isso é um CPF");
+                                return Ok();
+                            }
+                            else
+                            {
+                            return BadRequest();
+                            }
+                        }
+                    case 14:
+                        {
+                            new LojistaService().CriarConta(nome, email, senha, saldo, identidade);
+                            Console.WriteLine("Isso é um CNPJ");
+                            return Ok();
+                        }
+                    default:
+                        {
+                            return BadRequest();
+                        }
                 }
             }
             catch (Exception ex)
