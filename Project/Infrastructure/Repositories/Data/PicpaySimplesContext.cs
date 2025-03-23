@@ -7,7 +7,7 @@ public class PicpaySimplesContext : DbContext
     {
         public PicpaySimplesContext (DbContextOptions<PicpaySimplesContext> options) : base(options) { }
 
-        public DbSet<UserComum> UserCõmum { get; set; } = default!;
+        public DbSet<UserComum> UserComum { get; set; } = default!;
         public DbSet<Lojista> Lojistas { get; set; } = default!;
     }
 }

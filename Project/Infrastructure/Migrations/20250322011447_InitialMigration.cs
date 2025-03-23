@@ -28,7 +28,7 @@ namespace PicpaySimples.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserCõmum",
+                name: "UserComum",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -40,7 +40,7 @@ namespace PicpaySimples.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserCõmum", x => x.Id);
+                    table.PrimaryKey("PK_UserComum", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -58,9 +58,9 @@ namespace PicpaySimples.Migrations
                 {
                     table.PrimaryKey("PK_Transacao", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Transacao_UserCõmum_UserComumId",
+                        name: "FK_Transacao_UserComum_UserComumId",
                         column: x => x.UserComumId,
-                        principalTable: "UserCõmum",
+                        principalTable: "UserComum",
                         principalColumn: "Id");
                 });
 
@@ -80,7 +80,7 @@ namespace PicpaySimples.Migrations
                 name: "Transacao");
 
             migrationBuilder.DropTable(
-                name: "UserCõmum");
+                name: "UserComum");
         }
     }
 }

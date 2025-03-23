@@ -108,7 +108,7 @@ namespace PicpaySimples.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserCõmum");
+                    b.ToTable("UserComum");
                 });
 
             modelBuilder.Entity("Project.Models.Transacao", b =>

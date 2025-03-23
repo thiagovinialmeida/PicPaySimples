@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Project.Models;
 using Project.Data;
 using Project.Services;
@@ -15,103 +9,78 @@ namespace Project.UI
     [ApiController]
     public class UsuariosController : ControllerBase
     {
-        private readonly PicpaySimplesContext _context;
-        private readonly IUsuarioService _us;
+        private readonly UsuarioService _us;
 
-        public UsuariosController(PicpaySimplesContext context)
+        public UsuariosController(PicpaySimplesContext context, UsuarioService us)
         {
-            _context = context;
+            _us = us;
         }
 
         // GET: api/Usuarios
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuario()
         {
-            return await _context.Lojistas.ToListAsync();
+            return _us.TodasContas();
         }
 
         // GET: api/Usuarios/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Usuario>> GetUsuario(Guid id)
         {
-            var usuario = await _context.Lojistas.FindAsync(id);
-
+            var usuario = _us.MostrarConta(id);
             if (usuario == null)
             {
                 return NotFound();
             }
 
-            return usuario;
+            return Ok(usuario);
         }
 
         // PUT: api/Usuarios/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario(Guid id, Usuario usuario)
+        public async Task<IActionResult> EditarUsuario(Guid id)
         {
-            if (id != usuario.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(usuario).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UsuarioExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            _us.EditarConta(id);
+            return Ok("Usuario editado");
         }
 
         // POST: api/Usuarios
-        [HttpPost("{nome}/{email}/{senha}/{saldo}/{cpfCnpj}")]
-        [ValidateAntiForgeryToken]
+        [HttpPost("{nome}/{email}/{senha}/{saldo}/{identidade}")]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult<Usuario>> PostUsuario(string nome, string email, string senha, double saldo, string identidade)
         {
-            if (identidade.Length == 11)
+            try
             {
-                new UsuarioService().CriarConta(nome, email, senha, saldo, identidade);
-                Ok();
+                if (identidade.Length == 11)
+                {
+                    _us.CriarConta(nome, email, senha, saldo, identidade);
+                    Console.WriteLine("Isso é um CPF");
+                    return Ok();
+                }
+                else if (identidade.Length == 14)
+                {
+                    new LojistaService().CriarConta(nome, email, senha, saldo, identidade);
+                    Console.WriteLine("Isso é um CNPJ");
+                    return Ok();
+                }
+                else
+                {
+                    Console.WriteLine("BadRequest");
+                    return BadRequest();
+                }
             }
-            else if (identidade.Length == 14)
+            catch (Exception ex)
             {
-                new LojistaService().CriarConta(nome, email, senha, saldo, identidade); 
-                Ok();
+                return BadRequest(ex.Message);
             }
-            return BadRequest();
         }
 
         // DELETE: api/Usuarios/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUsuario(Guid id)
+        public async Task<IActionResult> DeletarUsuario(Guid id)
         {
-            var usuario = await _context.Lojistas.FindAsync(id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
-
-            _context.Lojistas.Remove(usuario);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool UsuarioExists(Guid id)
-        {
-            return _context.Lojistas.Any(e => e.Id == id);
+            _us.DeletarConta(id);
+            return Ok("Usuario deletado");
         }
     }
 }
