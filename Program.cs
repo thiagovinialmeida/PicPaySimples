@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Writers;
 using Project.Data;
 using Project.Services;
 
@@ -7,6 +8,7 @@ builder.Services.AddDbContext<PicpaySimplesContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("PicpaySimplesContext") ?? throw new InvalidOperationException("Connection string 'PicpaySimplesContext' not found.")));
 builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<LojistaService>();
+builder.Services.AddScoped<TransacaoService>();
 
 // Add services to the container.
 

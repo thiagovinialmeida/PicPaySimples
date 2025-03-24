@@ -16,5 +16,15 @@
             Senha = senha;
             Saldo = saldo;
         }
+
+        public void Depositar(double valor)
+        {
+            Saldo += valor;
+        }
+
+        public void Retirar(double valor)
+        {
+            Saldo -= valor;
+        }
     }
 }

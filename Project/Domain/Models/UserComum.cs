@@ -9,5 +9,10 @@
         {
             Cpf = cpf;
         }
+
+        public void TransacaoFeita(Transacao obj)
+        {
+            Transacoes.Add(obj);
+        }
     }
 }

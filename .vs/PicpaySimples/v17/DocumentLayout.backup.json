@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "C:\\dev\\projetos\\PicpaySimples\\src\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|c:\\dev\\projetos\\picpaysimples\\src\\project\\ui\\controllers\\transacaocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|solutionrelative:project\\ui\\controllers\\transacaocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|c:\\dev\\projetos\\picpaysimples\\src\\project\\ui\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|solutionrelative:project\\ui\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|c:\\dev\\projetos\\picpaysimples\\src\\project\\application\\services\\transacaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|solutionrelative:project\\application\\services\\transacaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|c:\\dev\\projetos\\picpaysimples\\src\\project\\domain\\models\\usercomum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|solutionrelative:project\\domain\\models\\usercomum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|c:\\dev\\projetos\\picpaysimples\\src\\project\\application\\services\\usuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -22,29 +34,64 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UsuarioService.cs",
-              "DocumentMoniker": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\Application\\Services\\UsuarioService.cs",
-              "RelativeDocumentMoniker": "Project\\Application\\Services\\UsuarioService.cs",
-              "ToolTip": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\Application\\Services\\UsuarioService.cs*",
-              "RelativeToolTip": "Project\\Application\\Services\\UsuarioService.cs*",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAtwFMAAAAgAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "UserComum.cs",
+              "DocumentMoniker": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\Domain\\Models\\UserComum.cs",
+              "RelativeDocumentMoniker": "Project\\Domain\\Models\\UserComum.cs",
+              "ToolTip": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\Domain\\Models\\UserComum.cs",
+              "RelativeToolTip": "Project\\Domain\\Models\\UserComum.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T11:19:49.99Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-24T01:19:24.461Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "TransacaoController.cs",
+              "DocumentMoniker": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\UI\\Controllers\\TransacaoController.cs",
+              "RelativeDocumentMoniker": "Project\\UI\\Controllers\\TransacaoController.cs",
+              "ToolTip": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\UI\\Controllers\\TransacaoController.cs",
+              "RelativeToolTip": "Project\\UI\\Controllers\\TransacaoController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T13:31:50.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TransacaoService.cs",
+              "DocumentMoniker": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\Application\\Services\\TransacaoService.cs",
+              "RelativeDocumentMoniker": "Project\\Application\\Services\\TransacaoService.cs",
+              "ToolTip": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\Application\\Services\\TransacaoService.cs",
+              "RelativeToolTip": "Project\\Application\\Services\\TransacaoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T13:29:43.612Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UsuarioService.cs",
+              "DocumentMoniker": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\Application\\Services\\UsuarioService.cs",
+              "RelativeDocumentMoniker": "Project\\Application\\Services\\UsuarioService.cs",
+              "ToolTip": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\Application\\Services\\UsuarioService.cs",
+              "RelativeToolTip": "Project\\Application\\Services\\UsuarioService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T11:19:49.99Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "UsuariosController.cs",
               "DocumentMoniker": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\UI\\Controllers\\UsuariosController.cs",
               "RelativeDocumentMoniker": "Project\\UI\\Controllers\\UsuariosController.cs",
-              "ToolTip": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\UI\\Controllers\\UsuariosController.cs*",
-              "RelativeToolTip": "Project\\UI\\Controllers\\UsuariosController.cs*",
-              "ViewState": "AgIAACQAAAAAAAAAAAAtwDUAAAAZAAAAAAAAAA==",
+              "ToolTip": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\UI\\Controllers\\UsuariosController.cs",
+              "RelativeToolTip": "Project\\UI\\Controllers\\UsuariosController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-21T19:47:43.792Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-21T19:47:43.792Z"
             }
           ]
         }
