@@ -10,7 +10,7 @@ namespace Project.Services
 
         public UsuarioService(PicpaySimplesContext context) { _context = context; }
 
-        public void CriarConta(string nome, string email, string senha, double saldo, string identidade)
+        public async Task CriarConta(string nome, string email, string senha, double saldo, string identidade)
         {
             try
             {
@@ -23,11 +23,11 @@ namespace Project.Services
             }
         }
 
-        public void DeletarConta(Guid id)
+        public async Task DeletarConta(Guid id)
         {
             try
             {
-                var usuario = ProcurarUsusario(id);
+                var usuario = await ProcurarUsusario(id);
                 if (UsuarioExiste(id))
                 {
                     _context.UserComum.Remove(usuario);
@@ -40,11 +40,11 @@ namespace Project.Services
             }
         }
 
-        public void EditarConta(Guid id)
+        public async Task EditarConta(Guid id)
         {
             try
             {
-                var usuario = ProcurarUsusario(id);
+                var usuario = await ProcurarUsusario(id);
 
                 if (usuario != null)
                 {
@@ -58,20 +58,20 @@ namespace Project.Services
             }
         }
 
-        public List<UserComum> TodasContas()
+        public async Task<List<UserComum>> TodasContas()
         {
-            return _context.UserComum.ToList();
+            return await _context.UserComum.ToListAsync();
         }
-        public UserComum MostrarConta(Guid id)
+        public async Task<UserComum> MostrarConta(Guid id)
         {
-            return ProcurarUsusario(id);
+            return await ProcurarUsusario(id);
         }
         ////
-        private UserComum ProcurarUsusario(Guid id)
+        private async Task<UserComum> ProcurarUsusario(Guid id)
         {
-            return _context.UserComum.Find(id);
+            return await _context.UserComum.FindAsync(id);
         }
-        public bool VerificarExistencia(string email,string identidade)
+        public async Task<bool> VerificarExistencia(string email,string identidade)
         {
             if (EmailExiste(email))
             {

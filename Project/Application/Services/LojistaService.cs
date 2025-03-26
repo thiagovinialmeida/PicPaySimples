@@ -9,7 +9,7 @@ namespace Project.Services
         private readonly PicpaySimplesContext _context;
         public LojistaService (PicpaySimplesContext context) { _context = context; }
 
-        public void CriarConta(string nome, string email, string senha, double saldo, string identidade)
+        public async Task CriarConta(string nome, string email, string senha, double saldo, string identidade)
         {
             if (identidade.Length == 14)
             {
@@ -18,12 +18,12 @@ namespace Project.Services
             }
         }
 
-        public void DeletarConta(Guid id)
+        public async Task DeletarConta(Guid id)
         {
             try
             {
-                var usuario = ProcurarUsusario(id);
-                if (UsuarioExiste(id))
+                var usuario = await ProcurarUsusario(id);
+                if (await UsuarioExiste(id))
                 {
                     _context.Lojistas.Remove(usuario);
                     _context.SaveChanges();
@@ -35,7 +35,7 @@ namespace Project.Services
             }
         }
 
-        public void EditarConta(Guid id)
+        public async Task EditarConta(Guid id)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace Project.Services
                 Console.WriteLine(dbE.Message);
             }
         }
-        public bool VerificarExistencia(string email, string identidade)
+        public async Task<bool> VerificarExistencia(string email, string identidade)
         {
             if (EmailExiste(email))
             {
@@ -73,22 +73,22 @@ namespace Project.Services
             }
         }
 
-        public List<Lojista> TodasContas()
+        public async Task<List<Lojista>> TodasContas()
         {
             return _context.Lojistas.ToList();
         }
-        public Lojista MostrarConta(Guid id)
+        public async Task<Lojista> MostrarConta(Guid id)
         {
-            return ProcurarUsusario(id);
+            return await ProcurarUsusario(id);
         }
 
         ////
 
-        private Lojista ProcurarUsusario(Guid id)
+        private async Task<Lojista> ProcurarUsusario(Guid id)
         {
             return _context.Lojistas.Find(id);
         }
-        private bool UsuarioExiste(Guid id)
+        private async Task<bool> UsuarioExiste(Guid id)
         {
             return _context.Lojistas.Any(e => e.Id == id);
         }

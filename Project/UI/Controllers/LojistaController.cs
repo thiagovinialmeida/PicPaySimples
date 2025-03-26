@@ -12,17 +12,18 @@ namespace PicpaySimples.Project.UI.Controllers
 
         public LojistaController(LojistaService ls) { _ls = ls; }
 
+        // GET: api/Lojistas
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetLojista()
         {
-            return _ls.TodasContas();
+            return await _ls.TodasContas();
         }
 
         // GET: api/Lojistas/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetLojista(Guid id)
         {
-            var lojista = _ls.MostrarConta(id);
+            var lojista = await _ls.MostrarConta(id);
             if (lojista == null)
             {
                 return NotFound();
@@ -32,10 +33,10 @@ namespace PicpaySimples.Project.UI.Controllers
         }
 
         // PUT: api/Lojistas/5
-        [HttpPut("{idlojista}")]
-        public async Task<IActionResult> EditarLojista(Guid idlojista)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditarLojista(Guid id)
         {
-            _ls.EditarConta(idlojista);
+            await _ls.EditarConta(id);
             return Ok("Lojista editado");
         }
 
@@ -49,9 +50,9 @@ namespace PicpaySimples.Project.UI.Controllers
                 {
                     case 14:
                         {
-                            if (_ls.VerificarExistencia(email, identidade))
+                            if (await _ls.VerificarExistencia(email, identidade))
                             {
-                                _ls.CriarConta(nome, email, senha, saldo, identidade);
+                                await _ls.CriarConta(nome, email, senha, saldo, identidade);
                                 Console.WriteLine("Isso é um CNPJ");
                                 return Ok("Lojista criado");
                             }
@@ -82,7 +83,7 @@ namespace PicpaySimples.Project.UI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletarLojista(Guid id)
         {
-            _ls.DeletarConta(id);
+            await _ls.DeletarConta(id);
             return Ok("Lojista deletado");
         }
     }

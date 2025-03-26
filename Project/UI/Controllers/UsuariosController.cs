@@ -17,14 +17,14 @@ namespace Project.UI
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuario()
         {
-            return _us.TodasContas();
+            return await _us.TodasContas();
         }
 
         // GET: api/Usuarios/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Usuario>> GetUsuario(Guid id)
         {
-            var usuario = _us.MostrarConta(id);
+            var usuario = await _us.MostrarConta(id);
             if (usuario == null)
             {
                 return NotFound();
@@ -37,7 +37,7 @@ namespace Project.UI
         [HttpPut("{id}")]
         public async Task<IActionResult> EditarUsuario(Guid id)
         {
-            _us.EditarConta(id);
+            await _us.EditarConta(id);
             return Ok("Usuario editado");
         }
 
@@ -51,9 +51,9 @@ namespace Project.UI
                 {
                     case 11:
                         {
-                            if (_us.VerificarExistencia(email, identidade))
+                            if (await _us.VerificarExistencia(email, identidade))
                             {
-                                _us.CriarConta(nome, email, senha, saldo, identidade);
+                                await _us.CriarConta(nome, email, senha, saldo, identidade);
                                 Console.WriteLine("Isso é um CPF");
                                 return Ok("Usuario criado");
                             }
@@ -83,7 +83,7 @@ namespace Project.UI
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletarUsuario(Guid id)
         {
-            _us.DeletarConta(id);
+            await _us.DeletarConta(id);
             return Ok("Usuario deletado");
         } 
     }

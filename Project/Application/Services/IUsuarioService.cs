@@ -2,9 +2,9 @@
 {
     public interface IUsuarioService
     {
-        void CriarConta(string nome, string email, string senha, double saldo, string identidade);
-        void DeletarConta(Guid id);
-        void EditarConta(Guid id);
-        bool VerificarExistencia(string email, string identidade);
+        Task CriarConta(string nome, string email, string senha, double saldo, string identidade);
+        Task DeletarConta(Guid id);
+        Task EditarConta(Guid id);
+        Task<bool> VerificarExistencia(string email, string identidade);
     }
 }
