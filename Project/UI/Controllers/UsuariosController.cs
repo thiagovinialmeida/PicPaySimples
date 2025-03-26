@@ -43,7 +43,6 @@ namespace Project.UI
 
         // POST: api/Usuarios
         [HttpPost("{nome}/{email}/{senha}/{saldo}/{identidade}")]
-        //[ValidateAntiForgeryToken]
         public async Task<ActionResult<Usuario>> PostUsuario(string nome, string email, string senha, double saldo, string identidade)
         {
             try
@@ -56,22 +55,21 @@ namespace Project.UI
                             {
                                 _us.CriarConta(nome, email, senha, saldo, identidade);
                                 Console.WriteLine("Isso é um CPF");
-                                return Ok();
+                                return Ok("Usuario criado");
                             }
                             else
                             {
-                            return BadRequest();
+                                return BadRequest("Esse CPF ou email já foi registrado anteriormente");
                             }
                         }
                     case 14:
                         {
-                            new LojistaService().CriarConta(nome, email, senha, saldo, identidade);
-                            Console.WriteLine("Isso é um CNPJ");
-                            return Ok();
+                             Console.WriteLine("Isso é um CNPJ");
+                             return BadRequest();
                         }
                     default:
                         {
-                            return BadRequest();
+                            return NotFound();
                         }
                 }
             }
@@ -87,6 +85,6 @@ namespace Project.UI
         {
             _us.DeletarConta(id);
             return Ok("Usuario deletado");
-        }
+        } 
     }
 }
