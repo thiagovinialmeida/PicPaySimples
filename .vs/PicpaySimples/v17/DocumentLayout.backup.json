@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "C:\\dev\\projetos\\PicpaySimples\\src\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|c:\\dev\\projetos\\picpaysimples\\src\\project\\application\\services\\lojistaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|solutionrelative:project\\application\\services\\lojistaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|c:\\dev\\projetos\\picpaysimples\\src\\project\\ui\\controllers\\lojistacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|solutionrelative:project\\ui\\controllers\\lojistacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|c:\\dev\\projetos\\picpaysimples\\src\\project\\application\\services\\transacaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|solutionrelative:project\\application\\services\\transacaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +14,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "LojistaController.cs",
-              "DocumentMoniker": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\UI\\Controllers\\LojistaController.cs",
-              "RelativeDocumentMoniker": "Project\\UI\\Controllers\\LojistaController.cs",
-              "ToolTip": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\UI\\Controllers\\LojistaController.cs*",
-              "RelativeToolTip": "Project\\UI\\Controllers\\LojistaController.cs*",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAawCQAAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T00:10:02.588Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "LojistaService.cs",
-              "DocumentMoniker": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\Application\\Services\\LojistaService.cs",
-              "RelativeDocumentMoniker": "Project\\Application\\Services\\LojistaService.cs",
-              "ToolTip": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\Application\\Services\\LojistaService.cs",
-              "RelativeToolTip": "Project\\Application\\Services\\LojistaService.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAUwGsAAAABAAAAAAAAAA==",
+              "Title": "TransacaoService.cs",
+              "DocumentMoniker": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\Application\\Services\\TransacaoService.cs",
+              "RelativeDocumentMoniker": "Project\\Application\\Services\\TransacaoService.cs",
+              "ToolTip": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\Application\\Services\\TransacaoService.cs",
+              "RelativeToolTip": "Project\\Application\\Services\\TransacaoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T23:44:19.804Z",
+              "WhenOpened": "2025-03-26T01:27:11.029Z",
               "EditorCaption": ""
             }
           ]

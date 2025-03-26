@@ -1,4 +1,5 @@
-﻿using Project.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Project.Data;
 using Project.Models;
 
 namespace Project.Services
@@ -11,13 +12,26 @@ namespace Project.Services
         public async Task FazerTransferencia(double valor,Guid idRemetente, Guid idDestinatario)
         {
             UserComum remetente = await _context.UserComum.FindAsync(idRemetente);
-            UserComum destinatario = await _context.UserComum.FindAsync(idDestinatario);
+            var destinatarioUsuario = await _context.UserComum.FirstOrDefaultAsync(id => id.Id == idDestinatario);
 
-            remetente.Retirar(valor);
-            destinatario.Depositar(valor);
+            if (destinatarioUsuario == null)
+            {
+                Usuario destinatarioLojista = destinatarioUsuario;
+                destinatarioLojista = await _context.Lojistas.FirstOrDefaultAsync(id => id.Id == idDestinatario);
 
-            remetente.TransacaoFeita(new Transacao(remetente.Nome, destinatario.Nome, valor));
-            _context.SaveChanges();
+                remetente.Retirar(valor);
+                destinatarioLojista.Depositar(valor);
+
+                remetente.TransacaoFeita(new Transacao(remetente.Nome, destinatarioLojista.Nome, valor));
+            }
+            else
+            {
+                remetente.Retirar(valor);
+                destinatarioUsuario.Depositar(valor);
+
+                remetente.TransacaoFeita(new Transacao(remetente.Nome, destinatarioUsuario.Nome, valor));
+                _context.SaveChanges();
+            }
         }
     }
 }
