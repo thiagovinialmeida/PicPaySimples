@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\dev\\projetos\\PicpaySimples\\src\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|c:\\dev\\projetos\\picpaysimples\\src\\project\\application\\services\\transacaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|solutionrelative:project\\application\\services\\transacaoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|c:\\dev\\projetos\\picpaysimples\\src\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{58A21CC4-F9B4-4649-905A-845F57CEDF74}|PicpaySimples.csproj|solutionrelative:dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "TransacaoService.cs",
-              "DocumentMoniker": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\Application\\Services\\TransacaoService.cs",
-              "RelativeDocumentMoniker": "Project\\Application\\Services\\TransacaoService.cs",
-              "ToolTip": "C:\\dev\\projetos\\PicpaySimples\\src\\Project\\Application\\Services\\TransacaoService.cs",
-              "RelativeToolTip": "Project\\Application\\Services\\TransacaoService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T01:27:11.029Z",
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\dev\\projetos\\PicpaySimples\\src\\Dockerfile",
+              "RelativeDocumentMoniker": "Dockerfile",
+              "ToolTip": "C:\\dev\\projetos\\PicpaySimples\\src\\Dockerfile",
+              "RelativeToolTip": "Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-03-29T13:59:17.441Z",
               "EditorCaption": ""
             }
           ]

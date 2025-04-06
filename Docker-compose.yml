@@ -1,0 +1,36 @@
+﻿services:
+  picpaysimples:
+    container_name: picpaysimplesapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5676:8080
+      - 5677:8081
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on: 
+      - "SqlDb"
+    networks:
+      - api-network
+
+  SqlDb:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+        ACCEPT_EULA: "1"
+        Database: "PicpayDb"
+        SA_PASSWORD: "PicpaySimplesApp01"
+    ports:
+      - 1433:1433
+    volumes:
+      - "sqldb-mssql-azure-edge:/var/opt/mssql"
+    networks:
+      - api-network
+
+
+volumes:
+  sqldb-mssql-azure-edge:
+
+networks:
+  api-network:
+    driver: bridge
