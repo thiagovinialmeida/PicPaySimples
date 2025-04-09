@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Project.Models;
 using Project.Services;
 
 namespace PicpaySimples.Project.UI.Controllers

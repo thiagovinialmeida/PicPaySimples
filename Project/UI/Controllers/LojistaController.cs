@@ -34,25 +34,25 @@ namespace PicpaySimples.Project.UI.Controllers
 
         // PUT: api/Lojistas/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditarLojista(Guid id)
+        public async Task<IActionResult> EditarLojista(Guid id, Lojista lojista)
         {
-            await _ls.EditarConta(id);
+            await _ls.EditarConta(id, lojista);
             return Ok("Lojista editado");
         }
 
         // POST: api/Usuarios
-        [HttpPost("{nome}/{email}/{senha}/{saldo}/{identidade}")]
-        public async Task<ActionResult<Usuario>> PostUsuario(string nome, string email, string senha, double saldo, string identidade)
+        [HttpPost]
+        public async Task<ActionResult<Usuario>> PostUsuario(Lojista lojista)
         {
             try
             {
-                switch (identidade.Length)
+                switch (lojista.CNPJ.Length)
                 {
                     case 14:
                         {
-                            if (await _ls.VerificarExistencia(email, identidade))
+                            if (await _ls.VerificarExistencia(lojista))
                             {
-                                await _ls.CriarConta(nome, email, senha, saldo, identidade);
+                                await _ls.CriarConta(lojista);
                                 Console.WriteLine("Isso é um CNPJ");
                                 return Ok("Lojista criado");
                             }

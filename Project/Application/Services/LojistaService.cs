@@ -9,12 +9,13 @@ namespace Project.Services
         private readonly PicpaySimplesContext _context;
         public LojistaService (PicpaySimplesContext context) { _context = context; }
 
-        public async Task CriarConta(string nome, string email, string senha, double saldo, string identidade)
+        public async Task CriarConta<T>(T user)
         {
-            if (identidade.Length == 14)
+            var lojista = user as Lojista;
+            if (lojista.CNPJ.Length == 14)
             {
-                _context.Lojistas.Add(new Lojista(nome, email, senha, saldo, identidade));
-                _context.SaveChanges();
+                await _context.Lojistas.AddAsync(lojista);
+                await _context.SaveChangesAsync();
             }
         }
 
@@ -26,7 +27,7 @@ namespace Project.Services
                 if (await UsuarioExiste(id))
                 {
                     _context.Lojistas.Remove(usuario);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                 }
             }
             catch (Exception ex)
@@ -35,16 +36,16 @@ namespace Project.Services
             }
         }
 
-        public async Task EditarConta(Guid id)
+        public async Task EditarConta<T>(Guid id, T lojista)
         {
             try
             {
-                var usuario = ProcurarUsusario(id);
-
-                if (usuario != null)
+                await DeletarConta(id);
+                
+                if (lojista != null)
                 {
-                    _context.Update(usuario);
-                    _context.SaveChanges();
+                    _context.Update(lojista);
+                    await _context.SaveChangesAsync();
                 }
             }
             catch (DbUpdateConcurrencyException dbE)
@@ -52,12 +53,14 @@ namespace Project.Services
                 Console.WriteLine(dbE.Message);
             }
         }
-        public async Task<bool> VerificarExistencia(string email, string identidade)
+        public async Task<bool> VerificarExistencia<T>(T user)
         {
-            if (EmailExiste(email))
+            var lojista = user as Lojista;
+            
+            if (EmailExiste(lojista.Email))
             {
                 //Caso o email não exista, verificar CPF
-                if (IdentidadeExiste(identidade))
+                if (IdentidadeExiste(lojista.CNPJ))
                 {
                     //Caso o CPF não exista, pode criar novo usuario
                     return true;
@@ -75,7 +78,7 @@ namespace Project.Services
 
         public async Task<List<Lojista>> TodasContas()
         {
-            return _context.Lojistas.ToList();
+            return await _context.Lojistas.ToListAsync();
         }
         public async Task<Lojista> MostrarConta(Guid id)
         {
@@ -86,22 +89,22 @@ namespace Project.Services
 
         private async Task<Lojista> ProcurarUsusario(Guid id)
         {
-            return _context.Lojistas.Find(id);
+            return await _context.Lojistas.FindAsync(id);
         }
         private async Task<bool> UsuarioExiste(Guid id)
         {
-            return _context.Lojistas.Any(e => e.Id == id);
+            return await _context.Lojistas.AnyAsync(e => e.Id == id);
         }
         //Retorna TRUE se o CNPJ não existir
         private bool IdentidadeExiste(string identidade)
         {
-            Lojista usuario = _context.Lojistas.FirstOrDefault(cpf => cpf.CNPJ == identidade);
+            Task<Lojista?> usuario = _context.Lojistas.FirstOrDefaultAsync(cnpj => cnpj.CNPJ == identidade);
             return usuario == null;
         }
         //Retorna TRUE se o email não existir
         private bool EmailExiste(string email)
         {
-            Lojista usuario = _context.Lojistas.FirstOrDefault(e => e.Email == email);
+            Task<Lojista?> usuario = _context.Lojistas.FirstOrDefaultAsync(e => e.Email == email);
             return usuario == null;
         }
     }

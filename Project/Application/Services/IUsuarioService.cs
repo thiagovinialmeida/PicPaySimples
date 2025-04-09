@@ -1,10 +1,12 @@
-﻿namespace Project.Services
+﻿using Project.Models;
+
+namespace Project.Services
 {
     public interface IUsuarioService
     {
-        Task CriarConta(string nome, string email, string senha, double saldo, string identidade);
+        Task CriarConta<T>(T user);
         Task DeletarConta(Guid id);
-        Task EditarConta(Guid id);
-        Task<bool> VerificarExistencia(string email, string identidade);
+        Task EditarConta<T>(Guid id, T usuarioNovo);
+        Task<bool> VerificarExistencia<T>(T usuario);
     }
 }

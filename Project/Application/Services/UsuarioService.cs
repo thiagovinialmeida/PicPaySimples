@@ -10,12 +10,12 @@ namespace Project.Services
 
         public UsuarioService(PicpaySimplesContext context) { _context = context; }
 
-        public async Task CriarConta(string nome, string email, string senha, double saldo, string identidade)
+        public async Task CriarConta<T>(T user)
         {
             try
             {
-                _context.UserComum.Add(new UserComum(nome, email, senha, saldo, identidade));
-                _context.SaveChanges();
+                await _context.UserComum.AddAsync(user as UserComum);
+                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -31,7 +31,7 @@ namespace Project.Services
                 if (UsuarioExiste(id))
                 {
                     _context.UserComum.Remove(usuario);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                 }
             }
             catch (Exception ex)
@@ -40,17 +40,14 @@ namespace Project.Services
             }
         }
 
-        public async Task EditarConta(Guid id)
+        public async Task EditarConta<T>(Guid id, T usuarioAtualizado)
         {
             try
             {
-                var usuario = await ProcurarUsusario(id);
-
-                if (usuario != null)
-                {
-                    _context.Update(usuario);
-                    _context.SaveChanges();
-                }
+                await DeletarConta(id);
+                
+                await _context.AddAsync(usuarioAtualizado as UserComum);
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException dbE)
             {
@@ -58,25 +55,26 @@ namespace Project.Services
             }
         }
 
-        public async Task<List<UserComum>> TodasContas()
+        public async Task<List<UserComum?>> TodasContas()
         {
             return await _context.UserComum.ToListAsync();
         }
-        public async Task<UserComum> MostrarConta(Guid id)
+        public async Task<UserComum?> MostrarConta(Guid id)
         {
             return await ProcurarUsusario(id);
         }
         ////
-        private async Task<UserComum> ProcurarUsusario(Guid id)
+        private async Task<UserComum?> ProcurarUsusario(Guid id)
         {
             return await _context.UserComum.FindAsync(id);
         }
-        public async Task<bool> VerificarExistencia(string email,string identidade)
+        public async Task<bool> VerificarExistencia<T>(T user)
         {
-            if (EmailExiste(email))
+            var usuario = user as UserComum;
+            if (EmailExiste(usuario.Email))
             {
                 //Caso o email não exista, verificar CPF
-                if (IdentidadeExiste(identidade))
+                if (IdentidadeExiste(usuario.Cpf))
                 {
                     //Caso o CPF não exista, pode criar novo usuario
                     return true;
@@ -98,13 +96,13 @@ namespace Project.Services
         //Retorna TRUE se o cpf não existir
         private bool IdentidadeExiste(string identidade)
         {
-            UserComum usuario = _context.UserComum.FirstOrDefault(cpf => cpf.Cpf == identidade);
+            UserComum? usuario = _context.UserComum?.FirstOrDefault(cpf => cpf.Cpf == identidade);
             return usuario == null;
         }
         //Retorna TRUE se o email não existir
         private bool EmailExiste(string email)
         {
-            UserComum usuario = _context.UserComum.FirstOrDefault(e => e.Email == email);
+            UserComum? usuario = _context.UserComum?.FirstOrDefault(e => e.Email == email);
             return usuario == null;
         }
     }

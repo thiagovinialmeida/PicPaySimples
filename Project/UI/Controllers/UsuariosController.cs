@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Project.Models;
-using Project.Data;
 using Project.Services;
 
 namespace Project.UI
@@ -15,7 +14,7 @@ namespace Project.UI
 
         // GET: api/Usuarios
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuario()
+        public async Task<ActionResult<IEnumerable<Usuario?>>> GetUsuario()
         {
             return await _us.TodasContas();
         }
@@ -35,25 +34,26 @@ namespace Project.UI
 
         // PUT: api/Usuarios/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditarUsuario(Guid id)
+        public async Task<IActionResult> EditarUsuario(Guid id, UserComum usuario)
         {
-            await _us.EditarConta(id);
+            
+            await _us.EditarConta(id, usuario);
             return Ok("Usuario editado");
         }
 
         // POST: api/Usuarios
-        [HttpPost("{nome}/{email}/{senha}/{saldo}/{identidade}")]
-        public async Task<ActionResult<Usuario>> PostUsuario(string nome, string email, string senha, double saldo, string identidade)
+        [HttpPost]
+        public async Task<ActionResult<Usuario>> PostUsuario(UserComum usuario)
         {
             try
             {
-                switch (identidade.Length)
+                switch (usuario.Cpf.Length)
                 {
                     case 11:
                         {
-                            if (await _us.VerificarExistencia(email, identidade))
+                            if (await _us.VerificarExistencia(usuario))
                             {
-                                await _us.CriarConta(nome, email, senha, saldo, identidade);
+                                await _us.CriarConta(usuario);
                                 Console.WriteLine("Isso é um CPF");
                                 return Ok("Usuario criado");
                             }
