@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Project.Models;
 using Project.Services;
 
 namespace PicpaySimples.Project.UI.Controllers
@@ -16,13 +15,28 @@ namespace PicpaySimples.Project.UI.Controllers
         {
             try
             {
-                await _ts.FazerTransferencia(valor, idRemetente, idDestinatario);
-                return Ok("Transição concluida");
+                int status = await _ts.FazerTransferencia(valor, idRemetente, idDestinatario);
+
+                switch(status)
+                {
+                    case 202:
+                    {
+                        return Accepted();
+                    }
+                    case 401:
+                    {
+                        return Unauthorized("Transação não autorizada");
+                    }
+                    default:
+                    {
+                        return NotFound("Não foi possivel processar a transação");
+                    }
+                }
             }
             catch (Exception ex)
             {
                 return NotFound(ex.Message);
             }
-        }
+        }   
     }
 }

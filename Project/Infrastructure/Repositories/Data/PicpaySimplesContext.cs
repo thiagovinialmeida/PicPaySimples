@@ -9,5 +9,6 @@ public class PicpaySimplesContext : DbContext
 
         public DbSet<UserComum> UserComum { get; set; } = default!;
         public DbSet<Lojista> Lojistas { get; set; } = default!;
+        public DbSet<Transacao> Transacao { get; set; } = default!;
     }
 }

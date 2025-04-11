@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PicpaySimples.Project.Infrastructure.Mocks;
 using Project.Data;
 using Project.Models;
 
@@ -8,35 +11,52 @@ namespace Project.Services
     {
         private readonly PicpaySimplesContext _context;
         private readonly UsuarioService _us;
-        public TransacaoService(PicpaySimplesContext context, UsuarioService us) { _context = context; _us = us; }
 
-        public async Task FazerTransferencia(double valor,Guid idRemetente, Guid idDestinatario)
+        public TransacaoService(PicpaySimplesContext context, UsuarioService us)
         {
+            _context = context;
+            _us = us;
+        }
+
+        [HttpPut]
+        public async Task<int> FazerTransferencia(double valor, Guid idRemetente, Guid idDestinatario)
+        {
+            bool auth = await new AutorizacaoMock().Autorizacao();
+
             UserComum? remetente = await _context.UserComum.FindAsync(idRemetente);
             var destinatarioUsuario = await _context.UserComum.FirstOrDefaultAsync(id => id.Id == idDestinatario);
 
-            if (destinatarioUsuario == null)
+            if (remetente.Saldo - valor > 0)
             {
-                Lojista? destinatarioLojista = await _context.Lojistas.FirstOrDefaultAsync(id => id.Id == idDestinatario);
+                if (auth == true)
+                {
+                    if (destinatarioUsuario is null)
+                    {
+                        Lojista? destinatarioLojista =
+                            await _context.Lojistas.FirstOrDefaultAsync(id => id.Id == idDestinatario);
 
-                remetente?.Retirar(valor);
-                destinatarioLojista?.Depositar(valor);
+                        remetente?.Retirar(valor);
+                        destinatarioLojista?.Depositar(valor);
 
-                remetente?.TransacaoFeita(new Transacao(remetente.Nome, destinatarioLojista?.Nome, valor));
+                        remetente?.TransacaoFeita(new Transacao(remetente.Nome, destinatarioLojista?.Nome, valor));
 
-                await _us.EditarConta(idRemetente, remetente);
-                await _context.SaveChangesAsync();
+                        await _us.EditarConta(idRemetente, remetente);
+                        await _context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        remetente?.Retirar(valor);
+                        destinatarioUsuario.Depositar(valor);
+
+                        remetente?.TransacaoFeita(new Transacao(remetente.Nome, destinatarioUsuario.Nome, valor));
+
+                        await _context.SaveChangesAsync();
+                        return StatusCodes.Status202Accepted;
+                    }
+                }
+                return StatusCodes.Status401Unauthorized;
             }
-            else
-            {
-                remetente?.Retirar(valor);
-                destinatarioUsuario.Depositar(valor);
-
-                remetente?.TransacaoFeita(new Transacao(remetente.Nome, destinatarioUsuario.Nome, valor));
-                
-                await _us.EditarConta(idRemetente, remetente);
-                await _context.SaveChangesAsync();
-            }
+            return StatusCodes.Status404NotFound;
         }
     }
 }

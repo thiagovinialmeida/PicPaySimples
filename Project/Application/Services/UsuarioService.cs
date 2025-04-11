@@ -79,10 +79,7 @@ namespace Project.Services
                     //Caso o CPF não exista, pode criar novo usuario
                     return true;
                 }
-                else
-                {
                     return false;
-                }
             }
             else
             {

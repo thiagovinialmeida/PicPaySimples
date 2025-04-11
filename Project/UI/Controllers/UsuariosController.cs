@@ -45,6 +45,8 @@ namespace Project.UI
         [HttpPost]
         public async Task<ActionResult<Usuario>> PostUsuario(UserComum usuario)
         {
+            usuario.Id = Guid.NewGuid();
+            
             try
             {
                 switch (usuario.Cpf.Length)
@@ -57,10 +59,7 @@ namespace Project.UI
                                 Console.WriteLine("Isso é um CPF");
                                 return Ok("Usuario criado");
                             }
-                            else
-                            {
                                 return BadRequest("Esse CPF ou email já foi registrado anteriormente");
-                            }
                         }
                     case 14:
                         {
