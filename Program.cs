@@ -4,8 +4,19 @@ using Project.Data;
 using Project.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<PicpaySimplesContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("PicpaySimplesContext") ?? throw new InvalidOperationException("Connection string 'PicpaySimplesContext' not found.")));
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<PicpaySimplesContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("PicpaySimplesTestContext") ?? 
+                             throw new InvalidOperationException("Connection string 'PicpaySimplesContext' not found.")));
+}
+else
+{
+    builder.Services.AddDbContext<PicpaySimplesContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("PicpaySimplesContext") ??
+                             throw new InvalidOperationException("Connection string 'PicpaySimplesContext' not found.")));
+}
+
 builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<LojistaService>();
 builder.Services.AddScoped<TransacaoService>();

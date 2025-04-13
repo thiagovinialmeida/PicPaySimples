@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("0e4c463e-0337-4971-acf5-2bef19444748")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("PicpaySimples")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d6c1718d198991f103f9e2ab3b304404c44b3c3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d43601f9687c6dd74a2643091ee0e368e7a43a93")]
 [assembly: System.Reflection.AssemblyProductAttribute("PicpaySimples")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PicpaySimples")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

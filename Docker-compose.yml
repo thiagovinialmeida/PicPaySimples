@@ -7,8 +7,6 @@
     ports:
       - 5676:8080
       - 5677:8081
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
     depends_on: 
       - "SqlDb"
     networks:
@@ -16,10 +14,12 @@
 
   SqlDb:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    env_file:
+      - dockerconfig.env
     environment:
         ACCEPT_EULA: "1"
-        Database: "PicpayDb"
-        SA_PASSWORD: "PicpaySimplesApp01"
+        Database: ${DATABASE_NAME}
+        SA_PASSWORD: ${PRODUCT_PASSWORD}
     ports:
       - 1433:1433
     volumes:
